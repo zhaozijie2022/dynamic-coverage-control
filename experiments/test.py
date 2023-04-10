@@ -7,7 +7,6 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 scenario_name = "coverage1"
-# load_path = "./coverage_2/coverage_2_02_13_10_07/policy/"
 load_path = "./" + scenario_name + "/#done_policy/"
 
 max_ep_len = 80  # episode最多有多少状态转换

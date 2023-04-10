@@ -10,7 +10,6 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 scen_name = "coverage2"
-# load_path = "./coverage_3/coverage_3_02_23_11_54/policy/"
 load_path = "./coverage3/#done_policy/"
 
 is_save_gif = True
