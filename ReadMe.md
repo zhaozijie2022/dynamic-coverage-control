@@ -59,9 +59,8 @@ $R_{done}^t$ is one-time reward for task completion, which is equal to 0 only wh
 The third item is the sum of distance of undone PoIs and its nearest agent.
 The third term of the reward is crucial because it solves the problem of reward sparsity.
 
-The trained resulted is displayed as follow,
+The trained resulted is displayed as follow, (2 and 3 is unde connectivity preservation)
 
-![result1](https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif)
-![result2](https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov2.gif)
-![result3](https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov3.gif)
+<img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov2.gif" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov3.gif" width="250px">
 
+## To be Continued
