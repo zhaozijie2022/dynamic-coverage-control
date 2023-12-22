@@ -4,11 +4,9 @@ Based on MARL (Multi-Agent Reinforcement Learning),
 this project provides a dynamic coverage control algorithm for UAV swarm.
 Our task is to plan the flight route of the UAV swarm
 so that all discrete PoIs (Points of Interest) can be covered for a certain period of time.
-基于强化学习算法为无人机集群导航, 我们的任务时规划无人机的路线, 使得所有的PoI都得到覆盖.
 
 Considering the particularity of UAV swarm control, 
 this project focuses on analyzing how to maintain the communication connectivity of the swarm during execution.
-我们的目标是在执行覆盖任务的同时保持连通
 
 ## 1.Dynamic Point Coverage Environment
 ### Problem Formulation
@@ -64,5 +62,7 @@ The third term of the reward is crucial because it solves the problem of reward 
 The trained resulted is displayed as follow, (2 and 3 is unde connectivity preservation)
 
 <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov2.gif" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov3.gif" width="250px">
+
+<img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cc.png" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/stp.png" width="250px"> <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
 
 ## To be Continued
