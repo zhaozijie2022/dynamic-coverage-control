@@ -1,0 +1,17 @@
+env_file: mpe.uav_dcc
+env_class: DCEnv
+scenario_name: "coverage1"
+
+num_agents: 4
+num_pois: 20
+max_ep_len: 100
+r_cover: 0.2
+r_comm: 0.4
+comm_r_scale: 0.95
+comm_force_scale: 0.0
+
+
+save_name: "uav_dcc"
+ppo_epoch: 15
+n_rollout_threads: 32
+

@@ -1,0 +1,69 @@
+algo_file: "mappo"
+# prepare parameters
+n_training_threads: 32  # 用于训练的torch线程数
+#n_rollout_threads: 32  # 用于训练回合的并行环境数
+#n_ae_rollout_threads: 4 # 用于采样补充ae_buffer的并行环境数
+
+n_eval_rollout_threads: 1  # 用于评估回合的并行环境数
+n_render_rollout_threads: 1  # 用于渲染回合的并行环境数
+
+# env parameters
+use_obs_instead_of_state: false  # 是否使用观察数据而不是全局状态
+
+# network parameters
+share_policy: false  # 是否共享策略网络
+use_centralized_V: true  # 是否使用集中式价值函数
+use_stacked_frames: false  # 是否使用堆叠帧
+stacked_frames: 1  # 每个观察值的堆叠帧数
+algo_hidden_size: 256  # 策略和价值网络的隐藏层大小
+layer_N: 1  # 策略和价值网络的层数
+use_ReLU: true  # 是否使用ReLU激活函数
+use_popart: false  # 是否使用pop-art技术
+use_valuenorm: true
+use_feature_normalization: true  # 是否使用特征归一化
+use_orthogonal: true  # 是否使用正交初始化
+gain: 0.01  # 最后一个动作层的增益
+
+# recurrent parameters
+use_recurrent_policy: false
+use_naive_recurrent_policy: false
+recurrent_N: 1
+data_chunk_length: 10
+
+# optimizer parameters
+actor_lr: 5e-4
+critic_lr: 5e-4
+opti_eps: 1e-5  # RMSprop优化器的epsilon值
+weight_decay: 0
+
+# ppo parameters
+use_clipped_value_loss: true  # 是否使用截断值损失
+clip_param: 0.2  # PPO截断参数
+num_mini_batch: 1  # PPO小批量数量, 如果为1, batch_size = ep_len * env_num
+entropy_coef: 0.01  # 熵项系数
+value_loss_coef: 1  # 价值损失系数
+use_max_grad_norm: true  # 是否使用梯度的最大范数
+max_grad_norm: 10.0  # 最大梯度范数
+use_gae: true  # 是否使用广义优势估计
+gamma: 0.99  # 奖励的折扣因子
+gae_lambda: 0.95  # GAE的λ参数
+use_proper_time_limits: false  # 是否考虑时间限制的返回
+use_huber_loss: true  # 是否使用Huber损失
+use_value_active_masks: true  # 是否在值损失中使用掩码
+use_policy_active_masks: true  # 是否在策略损失中使用掩码
+huber_delta: 10.0  # Huber损失的δ系数
+
+# run parameters
+use_linear_lr_decay: true  # 是否使用线性学习率衰减
+
+# render parameters
+save_gifs: false  # 是否保存渲染视频
+use_render: false  # 是否在训练过程中渲染环境
+render_episodes: 5  # 渲染给定环境的回合数
+ifi: 0.1  # 保存视频中每个渲染图像的播放间隔
+
+
+
+
+
+
