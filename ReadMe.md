@@ -57,7 +57,7 @@ multiagent/render.py被修改以实时显示PoIs获得的当前功率以及无�
 其他一些更改，比如添加保持连接性的约束条件，根据约束条件修改动作，稍后会提到。
 
 
-## 2. Dynamic Control based MAPPO
+## 2. Dynamic Control based MARL
 The agent's observations include its own position and velocity, 
 as well as the relative positions of other agents and PoIs.
 The actions of the agent include forward, backward, left, and right, and keeping still.
@@ -94,3 +94,6 @@ The trained resulted is displayed as follow, (2 and 3 is unde connectivity prese
   <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/stp.png" width="250px">
   <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
 </div>
+
+## 3. MARL Code
+MAPPO-based code in uav_dcc_control
