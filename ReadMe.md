@@ -80,7 +80,7 @@ $R_{done}^t$是任务完成的一次性奖励，仅当任务完成时等于0；
 奖励的第三项非常关键，因为它作为引导项使得奖励更加密集。
 
 
-The trained resulted is displayed as follow, (2 and 3 is unde connectivity preservation)
+The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
 
 <div style="text-align: center;">
   <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif" width="250px">
@@ -97,3 +97,6 @@ The trained resulted is displayed as follow, (2 and 3 is unde connectivity prese
 
 ## 3. MARL Code
 MAPPO-based code in uav_dcc_control
+基于MAPPO算法的torch的代码在uav_dcc_control中, 目前实现了场景1(无连通保持约束下的覆盖)和场景2(规则约束下的连通保持覆盖). 
+
+场景3(基于动作矫正器的连通保持覆盖)在基于tensorflow的代码中, 我已经看不懂了, 能看懂tf1的可以试着看一下
