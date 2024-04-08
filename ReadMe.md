@@ -22,11 +22,11 @@ the power value changes with the movement of the UAV swarm.
 Over time, the obtained by PoI $p_j$ will accumulate as energy.
 When the energy obtained by $p_j$ is greater than required, 
 the task is considered to be completed.  
-有$N$个无人机，分别为$x_i^t$，以及$M$个PoIs，分别为$p_j$。
+有 $N$ 个无人机，分别为 $x_i^t$，以及 $M$ 个PoIs，分别为 $p_j$ 。
 每个PoI都有特定的检测需求，而每个无人机都能在一定范围内提供检测能力。
-我们使用能量和功率的概念来描述，无人机群体可以为PoI $p_j$提供功率，该功率值随着无人机群体的移动而变化。
-随着时间的推移，点$p_j$获得的功率将累积为能量。
-当$p_j$获得的能量大于所需能量时，任务被视为已完成。
+我们使用能量和功率的概念来描述，无人机群体可以为PoI $p_j$ 提供功率，该功率值随着无人机群体的移动而变化。
+随着时间的推移，点 $p_j$获得的功率将累积为能量。
+当 $p_j$获得的能量大于所需能量时，任务被视为已完成。
 
 Problem can be formulated as follow,
 
@@ -57,7 +57,7 @@ multiagent/render.py被修改以实时显示PoIs获得的当前功率以及无�
 其他一些更改，比如添加保持连接性的约束条件，根据约束条件修改动作，稍后会提到。
 
 
-## 2. Dynamic Control based MARL
+## 2. Dynamic Control based MARL 
 The agent's observations include its own position and velocity, 
 as well as the relative positions of other agents and PoIs.
 The actions of the agent include forward, backward, left, and right, and keeping still.
@@ -74,12 +74,12 @@ $$
 $R_{done}^t$ is one-time reward for task completion, which is equal to 0 only when the task is completed;
 The third item is the sum of distance of undone PoIs and its nearest agent.
 The third term of the reward is crucial because it solves the problem of reward sparsity.   
-其中，$M_d^t$是在时间$t$完成的PoIs的集合，第一项表示完成单个PoI覆盖的一次性奖励；
-$R_{done}^t$是任务完成的一次性奖励，仅当任务完成时等于0；
+其中， $M_d^t$ 是在时间 $t$完成的PoIs的集合，第一项表示完成单个PoI覆盖的一次性奖励；
+ $R_{done}^t$是任务完成的一次性奖励，仅当任务完成时等于0；
 第三项是未完成的PoIs及其最近代理之间距离的总和。
 奖励的第三项非常关键，因为它作为引导项使得奖励更加密集。
 
-
+## 3. Results
 The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
 
 <div style="text-align: center;">
@@ -95,8 +95,18 @@ The trained resulted is displayed as follow, (2 and 3 is under connectivity pres
   <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
 </div>
 
-## 3. MARL Code
+## 4. MARL Code
 MAPPO-based code in uav_dcc_control
 基于MAPPO算法的torch的代码在uav_dcc_control中, 目前实现了场景1(无连通保持约束下的覆盖)和场景2(规则约束下的连通保持覆盖). 
 
 场景3(基于动作矫正器的连通保持覆盖)在基于tensorflow的代码中, 我已经看不懂了, 能看懂tf1的可以试着看一下
+
+### 环境配置与运行
+```
+conda create -n dcc python==3.9
+pip3 install torch torchvision torchaudio omegaconf wandb
+pip install gym==0.10.5
+
+python train.py 0
+```
+其中sys变量0表示调用cuda:0, 如果cuda不可用, 则会使用cpu
