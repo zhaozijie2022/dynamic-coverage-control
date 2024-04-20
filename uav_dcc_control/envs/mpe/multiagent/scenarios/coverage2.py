@@ -31,6 +31,7 @@ class Scenario(BaseScenario):
         world = CoverageWorld(self.comm_r_scale, self.comm_force_scale)
         world.collaborative = True
 
+
         world.agents = [Agent() for _ in range(self.num_agents)]  # 代表UAV, size为覆盖面积
         world.landmarks = [Landmark() for _ in range(self.num_pois)]
         for i, agent in enumerate(world.agents):

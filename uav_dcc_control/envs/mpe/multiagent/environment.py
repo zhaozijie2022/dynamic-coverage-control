@@ -4,19 +4,20 @@ from gym.envs.registration import EnvSpec
 import numpy as np
 from .multi_discrete import MultiDiscrete
 
+
 # environment for all agents in the multiagent world
 # currently code assumes that no agents will be created/destroyed at runtime!
 
 
 class MultiAgentEnv(gym.Env):
     metadata = {
-        'render.modes' : ['human', 'rgb_array']
+        'render.modes': ['human', 'rgb_array']
     }
 
     def __init__(self, world, reset_callback=None, reward_callback=None,
                  observation_callback=None, info_callback=None,
                  done_callback=None, shared_viewer=True):
-                 # 输入中没有discrete_action_space, 默认
+        # 输入中没有discrete_action_space, 默认
 
         self.world = world
         self.agents = self.world.policy_agents
@@ -158,7 +159,7 @@ class MultiAgentEnv(gym.Env):
             size = action_space.high - action_space.low + 1
             index = 0
             for s in size:
-                act.append(action[index:(index+s)])
+                act.append(action[index:(index + s)])
                 index += s
             action = act
         else:
@@ -224,14 +225,14 @@ class MultiAgentEnv(gym.Env):
             # create viewers (if necessary)
             if self.viewers[i] is None:
                 # import rendering only if we need it (and don't import for headless machines)
-                #from gym.envs.classic_control import rendering
+                # from gym.envs.classic_control import rendering
                 from . import rendering
                 self.viewers[i] = rendering.Viewer(700, 700)
 
         # create rendering geometry
         if self.render_geoms is None:
             # import rendering only if we need it (and don't import for headless machines)
-            #from gym.envs.classic_control import rendering
+            # from gym.envs.classic_control import rendering
             from . import rendering
             self.render_geoms = []
             self.render_geoms_xform = []
@@ -246,11 +247,34 @@ class MultiAgentEnv(gym.Env):
                 self.render_geoms.append(geom)
                 self.render_geoms_xform.append(xform)
 
+            # This code for r_cover & r_comm
+            for agent in self.world.agents:
+                geom_cover = rendering.make_circle(agent.r_cover)
+                xform = rendering.Transform()
+                geom_cover.set_color(*agent.cover_color, alpha=0.15)
+                geom_cover.add_attr(xform)
+                self.render_geoms.append(geom_cover)
+                self.render_geoms_xform.append(xform)
+            for agent in self.world.agents:
+                geom_comm = rendering.make_circle(agent.r_comm)
+                xform = rendering.Transform()
+                geom_comm.set_color(*agent.comm_color, alpha=0.15)
+                geom_comm.add_attr(xform)
+                self.render_geoms.append(geom_comm)
+                self.render_geoms_xform.append(xform)
+
             # add geoms to viewer
             for viewer in self.viewers:
                 viewer.geoms = []
                 for geom in self.render_geoms:
                     viewer.add_geom(geom)
+
+        # specific code: for render the coverage of PoIs
+        for geom, entity in zip(self.render_geoms, self.world.entities):
+            if 'agent' in entity.name:
+                geom.set_color(*entity.color, alpha=0.5)
+            else:
+                geom.set_color(*entity.color)
 
         results = []
         for i in range(len(self.viewers)):
@@ -261,23 +285,32 @@ class MultiAgentEnv(gym.Env):
                 pos = np.zeros(self.world.dim_p)
             else:
                 pos = self.agents[i].state.p_pos
-            self.viewers[i].set_bounds(pos[0]-cam_range, pos[0]+cam_range, pos[1]-cam_range, pos[1]+cam_range)
+            self.viewers[i].set_bounds(pos[0] - cam_range, pos[0] + cam_range, pos[1] - cam_range, pos[1] + cam_range)
             # update geometry positions
             for e, entity in enumerate(self.world.entities):
                 self.render_geoms_xform[e].set_translation(*entity.state.p_pos)
 
-            # TODO: 画出围捕者之间的连线
-            # for p1 in range(0, self.world.n_predators):
-            #     for p2 in range(p1, self.world.n_predators):
-            #         self.viewers[i].draw_line(self.world.agents[p1].state.p_pos,
-            #                                   self.world.agents[p2].state.p_pos)
-            # TODO: 画出墙面
-            for i_w in range(4):
-                self.viewers[i].draw_line(self.world.wall[i_w],
-                                          self.world.wall[(i_w + 1) % 4])
+            ###### specific code
+            for e, agent in enumerate(self.agents):
+                self.render_geoms_xform[e + len(self.world.entities)].set_translation(*agent.state.p_pos)
+            for e, agent in enumerate(self.agents):
+                self.render_geoms_xform[e + len(self.world.entities) + len(self.world.agents)].set_translation(*agent.state.p_pos)
+
+            # 绘制通信线
+            for a, ag_a in enumerate(self.agents):
+                for b, ag_b in enumerate(self.agents):
+                    if b > a:
+                        if np.linalg.norm(ag_a.state.p_pos - ag_b.state.p_pos) < ag_a.r_comm + ag_b.r_comm:
+                            self.viewers[i].draw_line(ag_a.state.p_pos, ag_b.state.p_pos)
+
+            if getattr(self.world, "corners", False):
+                for i_w in range(4):
+                    self.viewers[i].draw_line(self.world.corners[i_w],
+                                              self.world.corners[(i_w + 1) % 4])
+            ####### specific code
 
             # render to display or array
-            results.append(self.viewers[i].render(return_rgb_array = mode=='rgb_array'))
+            results.append(self.viewers[i].render(return_rgb_array=mode == 'rgb_array'))
 
         return results
 
@@ -298,7 +331,7 @@ class MultiAgentEnv(gym.Env):
         if receptor_type == 'grid':
             for x in np.linspace(-range_max, +range_max, 5):
                 for y in np.linspace(-range_max, +range_max, 5):
-                    dx.append(np.array([x,y]))
+                    dx.append(np.array([x, y]))
         return dx
 
 
@@ -307,7 +340,7 @@ class MultiAgentEnv(gym.Env):
 class BatchMultiAgentEnv(gym.Env):
     metadata = {
         'runtime.vectorized': True,
-        'render.modes' : ['human', 'rgb_array']
+        'render.modes': ['human', 'rgb_array']
     }
 
     def __init__(self, env_batch):
@@ -332,7 +365,7 @@ class BatchMultiAgentEnv(gym.Env):
         info_n = {'n': []}
         i = 0
         for env in self.env_batch:
-            obs, reward, done, _ = env.step(action_n[i:(i+env.n)], time)
+            obs, reward, done, _ = env.step(action_n[i:(i + env.n)], time)
             i += env.n
             obs_n += obs
             # reward = [r / len(self.env_batch) for r in reward]

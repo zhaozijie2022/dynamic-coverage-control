@@ -1,4 +1,5 @@
 import numpy as np
+
 from envs.mpe.multiagent.core import World
 
 
@@ -20,6 +21,12 @@ class CoverageWorld(World):
         self.adj_mat_ = np.zeros([4, 4])  # 用于施加规则拉力的邻接矩阵
 
         self.dt = 0.1
+
+        self.bb = 1.2
+        self.boundary = [np.array([self.bb, 0]), np.array([-self.bb, 0]),
+                         np.array([0, self.bb]), np.array([0, -self.bb])]
+        self.corners = [np.array([self.bb, self.bb]), np.array([self.bb, -self.bb]),
+                         np.array([-self.bb, -self.bb]), np.array([-self.bb, +self.bb])]
 
     def revise_action(self, action_n):
         action_r = np.zeros_like(action_n)
@@ -165,4 +172,3 @@ class CoverageWorld(World):
                     poi.color = np.array([0.25, 1.0, 0.25])
                 poi.color = np.array([0.25, 0.25 + poi.energy / poi.m_energy * 0.75, 0.25])
         self.coverage_rate = num_done / len(self.landmarks)
-

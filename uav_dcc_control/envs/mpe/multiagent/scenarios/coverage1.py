@@ -29,9 +29,9 @@ class Scenario(BaseScenario):
 
     def make_world(self):
         world = CoverageWorld()
-        world.bb = 1.2
-        world.boundary = [np.array([world.bb, 0]), np.array([-world.bb, 0]),
-                          np.array([0, world.bb]), np.array([0, -world.bb])]
+        # world.bb = 1.2
+        # world.boundary = [np.array([world.bb, 0]), np.array([-world.bb, 0]),
+        #                   np.array([0, world.bb]), np.array([0, -world.bb])]
 
         world.collaborative = True
         num_agents = 4
