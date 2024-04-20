@@ -35,3 +35,10 @@ class DCEnv:
     def reset(self):
         return self.env.reset()
 
+    def close(self):
+        self.env.close()
+
+    def render(self, mode="human"):
+        return self.env.render(mode=mode)
+
+
