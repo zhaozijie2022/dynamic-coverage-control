@@ -106,7 +106,8 @@ MAPPO-based code in uav_dcc_control
 conda create -n dcc python==3.9
 pip3 install torch torchvision torchaudio omegaconf wandb
 pip install gym==0.10.5
+pip install pyglet==1.5.27  # optional for render
 
-python train.py 0
+python train.py 0  # "0" means cuda:0, if cuda is not available, subject "0" with any int
 ```
 其中sys变量0表示调用cuda:0, 如果cuda不可用, 则会使用cpu
