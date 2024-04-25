@@ -1,6 +1,6 @@
 # Programed by Z.Zhao
 # 不考虑连通保持的覆盖控制场景
-
+import os
 import numpy as np
 from envs.mpe.multiagent.CoverageWorld import CoverageWorld
 from envs.mpe.multiagent.core import Agent, Landmark
@@ -12,6 +12,9 @@ class Scenario(BaseScenario):
         # agents的数量, 起飞位置, poi的数量和起飞位置
         self.num_agents = num_agents
         self.num_pois = num_pois
+        self.pos_pois = np.load(
+            os.path.join(os.path.dirname(__file__), "pos_pois.npy")
+        )[0:num_pois, :]
         self.pos_pois = np.random.uniform(-1, 1, (num_pois, 2))
 
         self.r_cover = r_cover

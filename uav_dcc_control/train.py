@@ -23,10 +23,7 @@ if __name__ == "__main__":
     os.makedirs(cfg.main_save_path, exist_ok=True)
 
     cfg.log_wandb = False
-    cfg.save_model = False
-    # cfg.use_recurrent_policy = True
-
-    cfg.seed = 0
+    cfg.save_model = True
 
     learner = Learner(cfg)
     learner.train()

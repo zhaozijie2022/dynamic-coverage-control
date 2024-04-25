@@ -1,15 +1,31 @@
-import numpy as np
 import envs.mpe.multiagent.scenarios as scenarios
+import numpy as np
 from envs.mpe.multiagent.environment import MultiAgentEnv
 from gym.spaces import Box
 
 
 class DCEnv:
-    def __init__(self, scenario, num_agents=4, num_pois=20, max_ep_len=100, r_cover=0.2, r_comm=0.4, comm_r_scale=0.95, comm_force_scale=0.0, **kwargs):
+    def __init__(
+            self,
+            scenario,
+            num_agents=4,
+            num_pois=20,
+            max_ep_len=100,
+            r_cover=0.2,
+            r_comm=0.4,
+            comm_r_scale=0.95,
+            comm_force_scale=0.0,
+            **kwargs):
         # assert scenario == "coverage"
         self.n_agents = num_agents
         scenario = scenarios.load(scenario + ".py").Scenario(
-            num_agents, num_pois, r_cover, r_comm, comm_r_scale, comm_force_scale
+            num_agents,
+            num_pois,
+            r_cover,
+            r_comm,
+            comm_r_scale,
+            comm_force_scale,
+            **kwargs
         )
         # create world
         world = scenario.make_world()
@@ -40,5 +56,3 @@ class DCEnv:
 
     def render(self, mode="human"):
         return self.env.render(mode=mode)
-
-

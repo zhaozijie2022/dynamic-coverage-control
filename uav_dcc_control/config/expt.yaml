@@ -1,41 +1,20 @@
-# 1.train
 seed: 0
-n_iters: 1000
-eval_interval: 20
-save_interval: 100
-#sample_ae_interval: 1
+n_iters: 200
+eval_interval: 10
+render_interval: 50
+save_gifs: True
+save_interval: 50
 log_wandb: True
 log_interval: 1
 save_model: True
 load_model: False
 load_buffer_path: None
 main_save_path: "results/"
-load_model_path: "results/half_cheetah_dir_2ag/ours_ql_cl_1011_2159_seed0/models_1700.pt"
-
-#which_ae: ""  # ours(√), pearl(√), cen_mate, mix_mate, ind_mate
-
-# 2.1 ours
+load_model_path: "results/dcc/xxxx_xxxx_sdx/models_xxx.pt"
 hidden_sizes_mlp: [64]  # mlp encoder hidden size
-#ae_type: "hie_attn" # self_attn, hie_attn, transformer, rnn, retnet
-#n_heads: 4
-#n_blocks: 2
-#hidden_sizes_sd: [128]
-#hidden_sizes_rd: [128]
-#hidden_sizes_td: [128]
-
-#ada_task_prob: False
-
 lr: 5e-4
 
-#dist: "gaussian"  # gaussian or deterministic
-#kl_weight: 0.1
 
-#use_loss:
-#  ql: True
-#  cl: True
-#  td: False
-#  sd: False
-#  rd: False
 
 
 

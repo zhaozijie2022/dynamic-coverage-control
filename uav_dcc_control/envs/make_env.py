@@ -1,19 +1,21 @@
+import importlib
 import os
 
-import gym
 import numpy as np
-import torch
-from gym.spaces.box import Box
-import importlib
 from envs.wrappers import DummyVecEnv, SubprocVecEnv
 
 
-def make_env(cfg):
-    def get_env_fn(rank):
+def make_env(cfg, **kwargs):
+    if kwargs is not None:
+        for k, v in kwargs.items():
+            setattr(cfg, k, v)
+
+    def get_env_fn(rank, **kwargs):
         def init_env():
-            if "mpe" in cfg.env_file:
+            if "uav_dcc" in cfg.env_file:
                 env_file = importlib.import_module("envs." + cfg.env_file)
                 Env = getattr(env_file, cfg.env_class)
+
                 env = Env(
                     scenario=cfg.scenario_name,
                     num_agents=cfg.num_agents,
@@ -23,6 +25,7 @@ def make_env(cfg):
                     r_comm=cfg.r_comm,
                     comm_r_scale=cfg.comm_r_scale,
                     comm_force_scale=cfg.comm_force_scale,
+                    **kwargs,
                 )
 
                 if cfg.seed is not None:
@@ -32,6 +35,13 @@ def make_env(cfg):
                 raise NotImplementedError("env_file: %s not found" % cfg.env_file)
 
         return init_env
+
+    # if "uav_dcc" in cfg.env_file:
+    #     # TODO 在windows中并行环境随机生成的pos_pois各不相同, 算法无法收敛
+    #     if os.name == 'nt':
+    #         pos_pois = np.random.uniform(-1, 1, (cfg.num_pois, 2))
+    #     else:
+    #         pos_pois = None
 
     if cfg.n_rollout_threads == 1:
         return DummyVecEnv([get_env_fn(0)])

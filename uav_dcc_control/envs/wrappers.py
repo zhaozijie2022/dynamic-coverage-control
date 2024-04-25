@@ -133,7 +133,7 @@ def worker(remote, parent_remote, env_fn_wrapper):
 class SubprocVecEnv(ShareVecEnv):
     def __init__(self, env_fns, spaces=None):
         """
-        envs: list of gym environments to run in subprocesses
+        train_envs: list of gym environments to run in subprocesses
         """
         self.waiting = False
         self.closed = False

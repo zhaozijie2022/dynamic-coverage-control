@@ -1,10 +1,10 @@
 env_file: mpe.uav_dcc
 env_class: DCEnv
-scenario_name: "coverage1"
+scenario_name: "coverage"
 
 num_agents: 4
 num_pois: 20
-max_ep_len: 100
+max_ep_len: 150
 r_cover: 0.2
 r_comm: 0.4
 comm_r_scale: 0.95
@@ -13,5 +13,8 @@ comm_force_scale: 0.0
 
 save_name: "uav_dcc"
 ppo_epoch: 15
-n_rollout_threads: 32
+
+n_rollout_threads: 16  # 用于训练回合的并行环境数
+n_eval_rollout_threads: 16  # 用于评估回合的并行环境数
+n_render_rollout_threads: 1  # 用于渲染回合的并行环境数
 
