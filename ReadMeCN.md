@@ -54,7 +54,7 @@ $$
 判断下一时刻若失去连通，则在失去连通的无人机之间产生连通保持力，其满足
 
 $$
-f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 R}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
+f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 r}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
 \alpha>\frac{m vel_{\max }}{\ln \left(1+e^{2 v e l_{\max } \Delta t}\right)}
 $$
 

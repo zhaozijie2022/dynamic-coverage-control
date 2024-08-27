@@ -68,7 +68,7 @@ If the connectivity is lost at the next moment,
 connectivity-preserving force is generated between the UAVs that lose connectivity, which satisfies
 
 $$
-f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 R}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
+f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 r}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
 \alpha>\frac{m vel_{\max }}{\ln \left(1+e^{2 v e l_{\max } \Delta t}\right)}
 $$
 
