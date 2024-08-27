@@ -64,14 +64,15 @@ The third term of the reward is crucial because it solves the problem of reward 
 
 
 ## 3. Rule-based Connectivity Preservation
-判断下一时刻若失去连通，则在失去连通的无人机之间产生连通保持力，其满足
+If the connectivity is lost at the next moment,
+connectivity-preserving force is generated between the UAVs that lose connectivity, which satisfies
 
 $$
 f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 R}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
 \alpha>\frac{m vel_{\max }}{\ln \left(1+e^{2 v e l_{\max } \Delta t}\right)}
 $$
 
-证明略
+Proof is omitted.
 
 ## 4. Results
 The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
@@ -89,7 +90,7 @@ The trained resulted is displayed as follow, (2 and 3 is under connectivity pres
   <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
 </div>
 
-## 4. MARL Code
+## 5. MARL Code
 MAPPO-based code in uav_dcc_control
 
 ### Environment & Training
