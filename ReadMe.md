@@ -63,7 +63,17 @@ The third item is the sum of distance of undone PoIs and its nearest agent.
 The third term of the reward is crucial because it solves the problem of reward sparsity.   
 
 
-## 3. Results
+## 3. Rule-based Connectivity Preservation
+判断下一时刻若失去连通，则在失去连通的无人机之间产生连通保持力，其满足
+
+$$
+f_{r, i}=\alpha \times \ln \left(1+e^{d_{i j}^t-2 R}\right) \times \frac{x_j^t-x_i^t}{d_{i j}^t}, 
+\alpha>\frac{m vel_{\max }}{\ln \left(1+e^{2 v e l_{\max } \Delta t}\right)}
+$$
+
+证明略
+
+## 4. Results
 The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
 
 <div style="text-align: center;">
