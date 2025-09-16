@@ -28,7 +28,7 @@ $$
 其中, $E^r_j$ 表示$p_j$所需的能量.
 当 $\forall j, [E_{N,j}^t\geq E^r_j]$时, 任务被视为已完成.
 
-### Reinforcement Environment
+### 强化学习环境
 我们基于Multiagent-Particle-Envs构建了一个动态覆盖环境。
 CoverageWorld类继承自multiagent.core.world，在其step()方法中计算功率和能量，并更新了PoI的状态(通过判断已获得功率和所需功率, 判定是否已经完成覆盖)。
 scenarios中的文件描述了动态覆盖场景, 其中coverage1.py是不考虑连通保持的版本, coverage2.py是考虑连通保持的版本. 
@@ -36,7 +36,7 @@ multiagent/render.py被修改以实时显示PoIs获得的当前功率以及无�
 其他一些更改，比如添加保持连接性的约束条件，根据约束条件修改动作，稍后会提到。
 
 
-## 2. Dynamic Control based MARL 
+## 2. 基于MARL的动态覆盖控制 
 Agent的观测包括自身的位置和速度，以及其他agent和PoIs的相对位置, 当前能量, 所需能量, 是否完成覆盖的标志位。
 Agent的动作包括前进、后退、向左、向右和保持静止。
 作为一个纯粹的合作场景，所有agent的奖励都相同，并设置如下：
@@ -50,7 +50,7 @@ $$
 第三项是未完成的PoIs及其最近代理之间距离的总和。
 奖励的第三项非常关键，因为它作为引导项使得奖励更加密集。
 
-## 3. Rule-based Connectivity Preservation
+## 3. 基于规则的连通保持约束
 判断下一时刻若失去连通，则在失去连通的无人机之间产生连通保持力，其满足
 
 $$
@@ -60,24 +60,24 @@ $$
 
 证明略
 
-## 4. Results
-The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
+## 4. 结果
+训练结果如下所示, (2和3是考虑连通保持的版本)
 
 <div style="text-align: center;">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov2.gif" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov3.gif" width="250px">
+  <img src="./asset/cov1.gif" width="30%">
+  <img src="./asset/cov2.gif" width="30%">
+  <img src="./asset/cov3.gif" width="30%">
 </div>
 
 
 <div style="text-align: center;">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cc.png" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/stp.png" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
+  <img src="./asset/cc.png" width="30%">
+  <img src="./asset/stp.png" width="30%">
+  <img src="./asset/trajectory3.png" width="30%">
 </div>
 
 ## 5. MARL 代码
-基于MAPPO算法的torch的代码在uav_dcc_control中, 目前实现了场景1(无连通保持约束下的覆盖)和场景2(规则约束下的连通保持覆盖). 
+基于 [MAPPO](https://github.com/marlbenchmark/on-policy) 算法的torch的代码在 [uav_dcc_control](./uav_dcc_control) 中.
 
 ### 环境配置与运行
 ```

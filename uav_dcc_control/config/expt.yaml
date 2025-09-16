@@ -1,7 +1,7 @@
 seed: 0
 n_iters: 200
 eval_interval: 10
-render_interval: 50
+render_interval: 200
 save_gifs: True
 save_interval: 50
 log_wandb: True

@@ -37,7 +37,7 @@ $$
 When $\forall j, [E_{N,j}^t\geq E^r_j]$, 
 the task is considered to be completed.
 
-### Reinforcement Environment
+### Environment
 We build a dynamic coverage environment based on [Multiagent-Particle-Envs](https://github.com/openai/multiagent-particle-envs).
 Class `CoverageWorld` inherits from `multiagent.core.world`, in whose `step()`, the power and energy are calculated, and the PoI state is updated.
 `multiagent/scenarios/coverage.py` describes the dynamic coverage scenario.
@@ -78,20 +78,20 @@ Proof is omitted.
 The trained resulted is displayed as follow, (2 and 3 is under connectivity preservation)
 
 <div style="text-align: center;">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov1.gif" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov2.gif" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cov3.gif" width="250px">
+  <img src="./asset/cov1.gif" width="30%">
+  <img src="./asset/cov2.gif" width="30%">
+  <img src="./asset/cov3.gif" width="30%">
 </div>
 
 
 <div style="text-align: center;">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/cc.png" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/stp.png" width="250px">
-  <img src="https://github.com/zhaozijie2022/images/blob/master/dynamic-coverage-control/trajectory3.png" width="250px">
+  <img src="./asset/cc.png" width="30%">
+  <img src="./asset/stp.png" width="30%">
+  <img src="./asset/trajectory3.png" width="30%">
 </div>
 
 ## 5. MARL Code
-MAPPO-based code in uav_dcc_control
+[MAPPO](https://github.com/marlbenchmark/on-policy)-based code in [uav_dcc_control](./uav_dcc_control)
 
 ### Environment & Training
 ```

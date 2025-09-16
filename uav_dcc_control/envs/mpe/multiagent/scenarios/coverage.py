@@ -15,7 +15,7 @@ class Scenario(BaseScenario):
         self.pos_pois = np.load(
             os.path.join(os.path.dirname(__file__), "pos_pois.npy")
         )[0:num_pois, :]
-        self.pos_pois = np.random.uniform(-1, 1, (num_pois, 2))
+        # self.pos_pois = np.random.uniform(-1, 1, (num_pois, 2))
 
         self.r_cover = r_cover
         self.r_comm = r_comm
